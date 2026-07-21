@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Maison Atlas — Hébergements de charme et expériences à Marrakech. Palais, riads, villas et excursions dans l'Atlas et Agafay.">
+<meta name="theme-color" content="#241c16">
+<title>Maison Atlas — Séjours et expériences à Marrakech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #241c16;
+  --sable: #efe4cf;
+  --sable-deep: #e4d5b4;
+  --cream: #faf5e9;
+  --zellige: #1c5560;
+  --zellige-deep: #123d46;
+  --terracotta: #c1592f;
+  --gold: #b98a3d;
+  --line: rgba(36, 28, 22, 0.14);
+  --shadow: 0 20px 50px -25px rgba(18, 61, 70, 0.45);
+  --radius-arch: 50% 50% 0 0 / 32% 32% 0 0;
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.35s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--sable);
+  color: var(--ink);
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all var(--transition-fast);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--terracotta);
+}
+
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* ========== Zellige band ========== */
+.zellige-band {
+  height: 34px;
+  background-image:
+    radial-gradient(circle at 12.5% 50%, var(--terracotta) 0 4px, transparent 4.5px),
+    radial-gradient(circle at 37.5% 50%, var(--gold) 0 4px, transparent 4.5px),
+    radial-gradient(circle at 62.5% 50%, var(--zellige) 0 4px, transparent 4.5px),
+    radial-gradient(circle at 87.5% 50%, var(--terracotta) 0 4px, transparent 4.5px);
+  background-size: 100px 34px;
+  background-repeat: repeat-x;
+  background-color: var(--cream);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+/* ========== Arch frame (images) ========== */
+.arch-frame {
+  border-radius: var(--radius-arch);
+  background: var(--zellige-deep);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  aspect-ratio: auto;
+}
+
+.arch-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(180deg, rgba(18, 20, 15, 0) 50%, rgba(18, 20, 15, 0.6) 100%);
+}
+
+.arch-frame.pattern::after {
+  background-image:
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 26px),
+    repeating-linear-gradient(25deg, rgba(0, 0, 0, 0.12) 0 2px, transparent 2px 26px);
+}
+
+.arch-frame .tag {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--cream);
+  background: rgba(18, 20, 15, 0.4);
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+  backdrop-filter: blur(2px);
+}
+
+/* ========== Header & Navigation ========== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.1rem 0;
+  transition: background var(--transition-base), box-shadow var(--transition-base), padding var(--transition-base);
+  background: transparent;
+}
+
+header.scrolled {
+  background: rgba(239, 228, 207, 0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 var(--line);
+  padding: 0.75rem 0;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Fraunces', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: conic-gradient(var(--terracotta), var(--gold), var(--zellige), var(--terracotta));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-mark span {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 0.7rem;
+  color: var(--zellige-deep);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.9rem;
+  font-size: 0.92rem;
+}
+
+.nav-links a {
+  position: relative;
+  padding: 0.2rem 0;
+  font-weight: 500;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -2px;
+  height: 1px;
+  background: var(--terracotta);
+  transition: right var(--transition-fast);
+}
+
+.nav-links a:hover::after {
+  right: 0;
+}
+
+.nav-cta {
+  background: var(--zellige-deep);
+  color: var(--cream);
+  padding: 0.65rem 1.3rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav-cta:hover {
+  background: var(--terracotta);
+  transform: translateY(-1px);
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 26px;
+}
+
+.burger span {
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.burger.open span:nth-child(1) {
+  transform: rotate(45deg) translateY(10px);
+}
+
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-10px);
+}
+
+/* ========== Hero ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 6rem;
+  position: relative;
+  background:
+    radial-gradient(circle at 85% 12%, rgba(184, 138, 61, 0.18), transparent 45%),
+    radial-gradient(circle at 8% 90%, rgba(28, 85, 96, 0.16), transparent 40%);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  margin: 1.1rem 0 1.4rem;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.hero p.lede {
+  font-size: 1.08rem;
+  max-width: 48ch;
+  color: rgba(36, 28, 22, 0.78);
+  line-height: 1.7;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--terracotta);
+  color: var(--cream);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 26px -12px rgba(193, 89, 47, 0.55);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.btn-ghost:hover {
+  border-color: var(--zellige);
+  color: var(--zellige-deep);
+  background: rgba(28, 85, 96, 0.04);
+}
+
+.stat-row {
+  display: flex;
+  gap: 2.2rem;
+  margin-top: 2.8rem;
+  flex-wrap: wrap;
+}
+
+.stat b {
+  font-family: 'Fraunces', serif;
+  font-size: 1.7rem;
+  display: block;
+}
+
+.stat span {
+  font-size: 0.78rem;
+  color: rgba(36, 28, 22, 0.6);
+  letter-spacing: 0.03em;
+}
+
+.hero-visual {
+  position: relative;
+}
+
+.hero-visual .arch-frame {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+}
+
+.hero-badge {
+  position: absolute;
+  left: -1.4rem;
+  bottom: -1.4rem;
+  background: var(--cream);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  max-width: 220px;
+  border: 1px solid rgba(28, 85, 96, 0.1);
+}
+
+.hero-badge .stars {
+  color: var(--gold);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+.hero-badge b {
+  font-family: 'Fraunces', serif;
+  display: block;
+  font-size: 1.05rem;
+}
+
+.hero-badge small {
+  color: rgba(36, 28, 22, 0.6);
+  font-size: 0.72rem;
+}
+
+/* ========== Sections ========== */
+section {
+  padding: 6.5rem 0;
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: 3.2rem;
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  margin-top: 0.9rem;
+}
+
+.section-head p {
+  color: rgba(36, 28, 22, 0.72);
+  margin-top: 1rem;
+  max-width: 52ch;
+  line-height: 1.7;
+}
+
+/* ========== Offer grid ========== */
+.offer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--cream);
+  white-space: nowrap;
+}
+
+.filter-btn.active {
+  background: var(--terracotta);
+  color: var(--cream);
+  border-color: var(--terracotta);
+}
+
+.filter-btn:hover {
+  border-color: var(--terracotta);
+}
+
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.8rem;
+}
+
+.offer-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.offer-card:hover {
+  transform: translateY(-4px);
+}
+
+.offer-card-image {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--zellige-deep);
+  border-radius: 12px;
+}
+
+.offer-card-image .arch-frame {
+  width: 100%;
+  height: 100%;
+}
+
+.offer-card-image .favorite-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.offer-card-image .favorite-btn:hover {
+  background: white;
+}
+
+.offer-card h4 {
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+}
+
+.offer-card p {
+  font-size: 0.86rem;
+  color: rgba(36, 28, 22, 0.68);
+  line-height: 1.6;
+}
+
+.offer-price {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--terracotta);
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+
+/* ========== Amenities ========== */
+.amenities {
+  background: var(--zellige-deep);
+  color: var(--sable);
+  border-radius: 28px;
+  padding: clamp(2rem, 5vw, 3.5rem);
+}
+
+.amenities .section-head p {
+  color: rgba(239, 228, 207, 0.72);
+}
+
+.amenities .eyebrow {
+  color: var(--gold);
+}
+
+.amenities .eyebrow::before {
+  background: var(--gold);
+}
+
+.amen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.6rem;
+}
+
+.amen-card {
+  background: rgba(239, 228, 207, 0.06);
+  border: 1px solid rgba(239, 228, 207, 0.14);
+  border-radius: 16px;
+  padding: 1.5rem 1.3rem;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.amen-card:hover {
+  background: rgba(239, 228, 207, 0.12);
+  transform: translateY(-3px);
+}
+
+.amen-card-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.amen-card h4 {
+  font-size: 0.98rem;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.amen-card p {
+  font-size: 0.82rem;
+  color: rgba(239, 228, 207, 0.62);
+  line-height: 1.6;
+}
+
+/* ========== Booking ========== */
+.booking {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 3.5rem;
+  align-items: flex-start;
+}
+
+.booking-copy .price-tag {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 0.4rem;
+}
+
+.price-tag span {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.92rem;
+  color: rgba(36, 28, 22, 0.6);
+  font-weight: 400;
+}
+
+.policy-list {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.policy-list li {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  color: rgba(36, 28, 22, 0.75);
+  line-height: 1.5;
+}
+
+.policy-list svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--zellige);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.booking-card {
+  background: var(--cream);
+  border-radius: 22px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.field label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(36, 28, 22, 0.55);
+  font-weight: 600;
+}
+
+.field input,
+.field select {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.85rem;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.92rem;
+  background: var(--sable);
+  color: var(--ink);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--zellige);
+  box-shadow: 0 0 0 3px rgba(28, 85, 96, 0.1);
+}
+
+.field input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 4px;
+  opacity: 0.6;
+  filter: invert(0.8);
+}
+
+.field small.hint {
+  font-size: 0.72rem;
+  color: rgba(36, 28, 22, 0.55);
+}
+
+.booking-summary {
+  border-top: 1px dashed var(--line);
+  margin-top: 0.6rem;
+  padding-top: 1.1rem;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.booking-summary .row {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(36, 28, 22, 0.72);
+}
+
+.booking-summary .row.total {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  color: var(--ink);
+  font-weight: 600;
+  border-top: 1px solid var(--line);
+  padding-top: 0.7rem;
+  margin-top: 0.3rem;
+}
+
+.booking-card .btn-primary {
+  width: 100%;
+  justify-content: center;
+  margin-top: 1.3rem;
+}
+
+.booking-msg {
+  margin-top: 0.9rem;
+  font-size: 0.82rem;
+  text-align: center;
+  min-height: 1.2em;
+  padding: 0.6rem;
+  border-radius: 8px;
+}
+
+.booking-msg.error {
+  color: var(--terracotta);
+  background: rgba(193, 89, 47, 0.08);
+}
+
+.booking-msg.ok {
+  color: #2f6b3a;
+  background: rgba(47, 107, 58, 0.08);
+}
+
+/* ========== Reviews ========== */
+.reviews-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 2rem;
+}
+
+.review-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(18, 61, 70, 0.12);
+}
+
+.review-stars {
+  color: var(--gold);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+}
+
+.review-card p {
+  font-size: 0.92rem;
+  color: rgba(36, 28, 22, 0.78);
+  line-height: 1.7;
+}
+
+.reviewer {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: auto;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--terracotta), var(--gold));
+  flex-shrink: 0;
+}
+
+.reviewer b {
+  display: block;
+  font-size: 0.85rem;
+}
+
+.reviewer span {
+  font-size: 0.74rem;
+  color: rgba(36, 28, 22, 0.55);
+}
+
+.review-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.pagination-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.pagination-btn:hover {
+  background: var(--zellige-deep);
+  border-color: var(--zellige-deep);
+  color: var(--cream);
+}
+
+.pagination-btn.active {
+  background: var(--zellige-deep);
+  border-color: var(--zellige-deep);
+  color: var(--cream);
+}
+
+.pagination-info {
+  font-size: 0.85rem;
+  color: rgba(36, 28, 22, 0.6);
+}
+
+/* ========== Location ========== */
+.location {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.map-box {
+  aspect-ratio: 4 / 3;
+  border-radius: 22px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--zellige) 0%, var(--zellige-deep) 100%);
+  box-shadow: var(--shadow);
+}
+
+.map-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(239, 228, 207, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239, 228, 207, 0.18) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+.pin {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--terracotta);
+  transform: rotate(-45deg);
+  box-shadow: 0 0 0 8px rgba(193, 89, 47, 0.22);
+}
+
+.pin.pin-2 {
+  background: var(--gold);
+  box-shadow: 0 0 0 8px rgba(185, 138, 61, 0.22);
+}
+
+.poi-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.poi-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+
+.poi-list li span:last-child {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--terracotta);
+  font-weight: 600;
+}
+
+/* ========== CTA banner ========== */
+.cta-banner {
+  text-align: center;
+  background: var(--terracotta);
+  color: var(--cream);
+  border-radius: 28px;
+  padding: clamp(2.5rem, 6vw, 4.5rem) 2rem;
+}
+
+.cta-banner h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 1.2rem;
+}
+
+.cta-banner p {
+  max-width: 46ch;
+  margin: 0 auto 1.8rem;
+  opacity: 0.95;
+  line-height: 1.7;
+}
+
+.cta-banner .btn-primary {
+  background: var(--cream);
+  color: var(--terracotta);
+}
+
+.cta-banner .btn-primary:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* ========== Footer ========== */
+footer {
+  padding: 4.5rem 0 2.5rem;
+  color: rgba(36, 28, 22, 0.75);
+  font-size: 0.88rem;
+  border-top: 1px solid var(--line);
+}
+
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+  padding-bottom: 3rem;
+}
+
+.foot-grid h5 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: rgba(36, 28, 22, 0.5);
+  font-weight: 600;
+}
+
+.foot-grid li {
+  margin-bottom: 0.55rem;
+}
+
+.foot-grid li a:hover {
+  color: var(--terracotta);
+}
+
+.foot-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.78rem;
+  color: rgba(36, 28, 22, 0.55);
+}
+
+/* ========== Animations ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  animation: reveal-in 0.7s ease forwards;
+}
+
+@keyframes reveal-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 980px) {
+  .hero-grid, .booking, .location {
+    grid-template-columns: 1fr;
+  }
+  .foot-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .reviews-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta {
+    display: none;
+  }
+  .burger {
+    display: flex;
+  }
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+  .stat-row {
+    gap: 1.4rem;
+  }
+  .foot-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-badge {
+    left: auto;
+    right: -1rem;
+    bottom: -1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .offer-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nav-links.open {
+  display: flex;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  background: var(--cream);
+  padding: 1.5rem clamp(1.25rem, 4vw, 3rem);
+  box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.15);
+  gap: 1.1rem;
+  border-top: 1px solid var(--line);
+}
+</style>
+</head>
+
+<body>
+
+<header id="site-header" role="banner">
+  <div class="wrap">
+    <nav role="navigation" aria-label="Navigation principale">
+      <a href="#top" class="brand" aria-label="Maison Atlas — Retour à l'accueil">
+        <span class="brand-mark"><span>MA</span></span>
+        Maison&nbsp;Atlas
+      </a>
+      <ul class="nav-links" id="navLinks" role="menubar">
+        <li role="none"><a href="#hebergements" role="menuitem">Hébergements</a></li>
+        <li role="none"><a href="#excursions" role="menuitem">Excursions</a></li>
+        <li role="none"><a href="#pourquoi" role="menuitem">Pourquoi nous</a></li>
+        <li role="none"><a href="#reserver" role="menuitem">Réserver</a></li>
+        <li role="none"><a href="#avis" role="menuitem">Avis</a></li>
+        <li role="none"><a href="#localisation" role="menuitem">Accès</a></li>
+      </ul>
+      <a href="#reserver" class="nav-cta">Vérifier les disponibilités</a>
+      <button class="burger" id="burger" aria-label="Menu navigation" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="top" role="main">
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Présentation Maison Atlas">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Marrakech &amp; région · Séjours et expériences sur mesure</p>
+        <h1>Palais, riads, villas <em>et aventures</em> dans l'Atlas et le désert d'Agafay.</h1>
+        <p class="lede">Maison Atlas sélectionne des hébergements de charme à Marrakech — palais, riads, villas, appartements — et organise vos excursions : quad, buggy, dîner-spectacle à Agafay ou montgolfière au lever du soleil. Une seule adresse pour réserver, en direct, sur Airbnb ou sur Booking.com.</p>
+        <div class="hero-ctas">
+          <a href="#reserver" class="btn btn-primary">Voir les disponibilités</a>
+          <a href="#hebergements" class="btn btn-ghost">Découvrir l'offre</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat">
+            <b>40+</b>
+            <span>biens &amp; expériences sélectionnés</span>
+          </div>
+          <div class="stat">
+            <b>8</b>
+            <span>catégories de séjours et sorties</span>
+          </div>
+          <div class="stat">
+            <b>4.9</b>
+            <span>note moyenne · 340 avis</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="arch-frame pattern" style="background-image:url('https://images.unsplash.com/photo-1742236467776-8fcdd2e6a381?q=80&w=1200&auto=format&fit=crop')"><span class="tag">Palais privé · salon d'apparat</span></div>
+        <div class="hero-badge">
+          <div class="stars">★★★★★</div>
+          <div>
+            <b>Superhost</b>
+            <small>Airbnb &amp; Booking Genius</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="zellige-band" aria-hidden="true"></div>
+
+  <!-- HEBERGEMENTS -->
+  <section id="hebergements" aria-label="Hébergements">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Hébergements</p>
+        <h2>Quatre façons de séjourner à Marrakech.</h2>
+        <p>Du palais avec service dédié à l'appartement pratique en médina, chaque bien est sélectionné, inspecté et géré par notre équipe — ménage, accès et assistance inclus.</p>
+      </div>
+
+      <div class="offer-header reveal">
+        <div class="filter-group" id="typeFilters">
+          <button class="filter-btn active" data-filter="all">Tous les hébergements</button>
+          <button class="filter-btn" data-filter="palais">Palais privé</button>
+          <button class="filter-btn" data-filter="riad">Riads</button>
+          <button class="filter-btn" data-filter="villa">Villas</button>
+          <button class="filter-btn" data-filter="appartement">Appartements</button>
+        </div>
+      </div>
+
+      <div class="offer-grid" id="hebergementGrid" role="region" aria-label="Grille des hébergements">
+        <div class="offer-card reveal" data-type="palais">
+          <div class="offer-card-image">
+            <div class="arch-frame pattern" style="background-image:url('https://images.unsplash.com/photo-1742236467776-8fcdd2e6a381?q=80&w=1200&auto=format&fit=crop')"><span class="tag">Palais privé</span></div>
+            <button class="favorite-btn" aria-label="Ajouter aux favoris" data-id="palais-001">♡</button>
+          </div>
+          <h4>Palais privé</h4>
+          <p>Salons voûtés, hammam privé et service dédié pour séjours et réceptions d'exception.</p>
+          <span class="offer-price">à partir de 3 500 MAD / nuit</span>
+        </div>
+
+        <div class="offer-card reveal" data-type="riad">
+          <div class="offer-card-image">
+            <div class="arch-frame pattern" style="background-image:url('https://images.unsplash.com/photo-1628962601069-ffe240250c35?q=80&w=1200&auto=format&fit=crop')"><span class="tag">Riad de charme</span></div>
+            <button class="favorite-btn" aria-label="Ajouter aux favoris" data-id="riad-001">♡</button>
+          </div>
+          <h4>Riad de charme</h4>
+          <p>Patio à fontaine et chambres authentiques, au cœur des ruelles de la médina.</p>
+          <span class="offer-price">à partir de 950 MAD / nuit</span>
+        </div>
+
+        <div class="offer-card reveal" data-type="villa">
+          <div class="offer-card-image">
+            <div class="arch-frame pattern" style="background-image:url('https://images.unsplash.com/photo-1708804654353-7ef66cba7776?q=80&w=1200&auto=format&fit=crop')"><span class="tag">Villa avec piscine</span></div>
+            <button class="favorite-btn" aria-label="Ajouter aux favoris" data-id="villa-001">♡</button>
+          </div>
+          <h4>Villa avec piscine</h4>
+          <p>Piscine privée, jardin et grands espaces — idéal pour familles et groupes d'amis.</p>
+          <span class="offer-price">à partir de 2 200 MAD / nuit</span>
+        </div>
+
+        <div class="offer-card reveal" data-type="appartement">
+          <div class="offer-card-image">
+            <div class="arch-frame pattern" style="background-image:url('https://images.unsplash.com/photo-1570133435529-62359fac701b?q=80&w=1200&auto=format&fit=crop')"><span class="tag">Appartement médina</span></div>
+            <button class="favorite-btn" aria-label="Ajouter aux favoris" data-id="apt-001">♡</button>
+          </div>
+          <h4>Appartement en médina</h4>
+          <p>Formule pratique et confortable pour un city-trip, Wi-Fi fibre inclus.</p>
+          <span class="offer-price">à partir de 550 MAD / nuit</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXCURSIONS -->
+  <section id="excursions" aria-label="Excursions et expériences">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Excursions &amp; expériences</p>
+        <h2>L'Atlas et le désert d'Agafay, à la carte.</h2>
+        <p>Nos guides locaux organisent vos sorties depuis votre hébergement : transferts, matériel et encadrement inclus dans chaque formule.</p>
+      </div>
+
+      <div class="offer-header reveal">
+        <div class="filter-group" id="activityFilters">
+          <button class="filter-btn active" data-filter="all">Toutes les expériences</button>
+          <button class="filter-btn" data-filter="quad">Quad</button>
+          <button class="filter-btn" data-filter="buggy">Buggy</button>
+          <button class="filter-btn" data-filter="agafay">Dîner Agafay</button>
+          <button class="filter-btn" data-filter="montgolfiere">Montgolfière</button>
+        </div>
+      </div>
+
+      <div class="offer-grid" id="excursionGrid" role="region" aria-label="Grille des excursions">
+        <div class="offer-card reveal" data-type="quad">
+          <div class="offer-card-image">
+            <div class="arch-frame pattern" style="background-image:url('https://images.unsplash.com/photo-1624664929003-3da28050c0bf?q=80&w=1200&auto=format&fit=crop')"><span class="tag">Quad</span></div>
+            <button class="favorite-btn" aria-label="Ajouter aux favoris" data-id="quad-001">♡</button>
+          </div>
+          <h4>Excursion quad</h4>
+          <p>Deux heures de pistes dans les paysages lunaires du désert d'Agafay, guide inclus.</p>
+          <span class="offer-price">à partir de 450 MAD / pers.</span>
+        </div>
+
+        <div class="offer-card reveal" data-type="buggy">
+          <div class="offer-card-image">
+            <div class="arch-frame pattern" style="background-image:url('https://images.unsplash.com/photo-1631902082973-72d82e5e076e?q=80&w=1200&auto=format&fit=crop')"><span class="tag">Buggy</span></div>
+            <button class="favorite-btn" aria-label="Ajouter aux favoris" data-id="buggy-001">♡</button>
+          </div>
+          <h4>Excursion buggy</h4>
+          <p>Sensations fortes entre dunes et oasis, en solo ou à deux, matériel de sécurité fourni.</p>
+          <span class="offer-price">à partir de 600 MAD / pers.</span>
+        </div>
+
+        <div class="offer-card reveal" data-type="agafay">
+          <div class="offer-card-image">
+            <div class="arch-frame pattern" style="background-image:url('https://images.unsplash.com/photo-1613169620329-6785c004d900?q=80&w=1200&auto=format&fit=crop')"><span class="tag">Dîner Agafay</span></div>
+            <button class="favorite-btn" aria-label="Ajouter aux favoris" data-id="agafay-001">♡</button>
+          </div>
+          <h4>Dîner-spectacle à Agafay</h4>
+          <p>Coucher de soleil, tente berbère et dîner traditionnel sous les étoiles.</p>
+          <span class="offer-price">à partir de 750 MAD / pers.</span>
+        </div>
+
+        <div class="offer-card reveal" data-type="montgolfiere">
+          <div class="offer-card-image">
+            <div class="arch-frame pattern" style="background-image:url('https://images.unsplash.com/photo-1648139210607-7b30b1034830?q=80&w=1200&auto=format&fit=crop')"><span class="tag">Montgolfière</span></div>
+            <button class="favorite-btn" aria-label="Ajouter aux favoris" data-id="montgolfiere-001">♡</button>
+          </div>
+          <h4>Montgolfière au lever du soleil</h4>
+          <p>Survol de la plaine du Haouz et des contreforts de l'Atlas, thé berbère à l'atterrissage.</p>
+          <span class="offer-price">à partir de 1 800 MAD / pers.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POURQUOI NOUS -->
+  <section id="pourquoi" aria-label="Avantages Maison Atlas">
+    <div class="wrap">
+      <div class="amenities reveal">
+        <div class="section-head">
+          <p class="eyebrow">Pourquoi Maison Atlas</p>
+          <h2>Une seule équipe, du séjour à l'excursion.</h2>
+        </div>
+        <div class="amen-grid">
+          <div class="amen-card">
+            <svg class="amen-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M5 12V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5M4 12v7M20 12v7"></path></svg>
+            <h4>Wi-Fi fibre</h4>
+            <p>Dans tous nos hébergements, idéal télétravail.</p>
+          </div>
+          <div class="amen-card">
+            <svg class="amen-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-4.4-7-8-7-11a7 7 0 0 1 14 0c0 3-3 6.6-7 11z"></path><circle cx="12" cy="10" r="2.4"></circle></svg>
+            <h4>Transferts inclus</h4>
+            <p>Prise en charge à votre hébergement pour chaque excursion.</p>
+          </div>
+          <div class="amen-card">
+            <svg class="amen-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a4 4 0 0 1 8 0v2"></path></svg>
+            <h4>Paiement sécurisé</h4>
+            <p>Aucun prélèvement avant confirmation de votre réservation.</p>
+          </div>
+          <div class="amen-card">
+            <svg class="amen-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"></path></svg>
+            <h4>Annulation flexible</h4>
+            <p>Gratuite jusqu'à 5 jours avant l'arrivée sur la plupart des offres.</p>
+          </div>
+          <div class="amen-card">
+            <svg class="amen-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 14.8 7.1 17.2l.9-5.5-4-3.9L9.5 7z"></path></svg>
+            <h4>Guides certifiés</h4>
+            <p>Quad, buggy, montgolfière : encadrement professionnel et matériel entretenu.</p>
+          </div>
+          <div class="amen-card">
+            <svg class="amen-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M7 3v4M17 3v4"></path><rect x="3" y="6" width="18" height="15" rx="2"></rect></svg>
+            <h4>Check-in flexible</h4>
+            <p>Arrivée autonome 24h/24 pour tous nos hébergements.</p>
+          </div>
+          <div class="amen-card">
+            <svg class="amen-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg>
+            <h4>Assistance 7j/7</h4>
+            <p>Équipe francophone et anglophone joignable pendant tout le séjour.</p>
+          </div>
+          <div class="amen-card">
+            <svg class="amen-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20l3-11 3 4 3-7 3 14"></path></svg>
+            <h4>Petit-déjeuner sur demande</h4>
+            <p>Disponible dans nos riads, villas et palais partenaires.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVATION -->
+  <section id="reserver" aria-label="Formulaire de réservation">
+    <div class="wrap booking">
+      <div class="booking-copy reveal">
+        <p class="eyebrow">Réserver</p>
+        <h2>Choisissez votre formule, en direct.</h2>
+        <p class="price-tag" id="priceHeadline">950 MAD <span>/ nuit</span></p>
+        <p style="color:rgba(36,28,22,.7); margin-top:.3rem; font-size:.9rem;" id="priceNote">Riad de charme · minimum 2 nuits</p>
+        <ul class="policy-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 12l5 5L20 6"/></svg> Annulation gratuite jusqu'à 5 jours avant l'arrivée sur les hébergements</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 12l5 5L20 6"/></svg> Paiement sécurisé, aucun prélèvement avant confirmation</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 12l5 5L20 6"/></svg> Également disponible sur Airbnb et Booking.com</li>
+        </ul>
+      </div>
+
+      <form class="booking-card reveal" id="bookingForm" novalidate>
+        <div class="field">
+          <label for="category">Prestation</label>
+          <select id="category" required>
+            <optgroup label="Hébergements">
+              <option value="palais">Palais privé — 3 500 MAD/nuit</option>
+              <option value="riad" selected>Riad de charme — 950 MAD/nuit</option>
+              <option value="villa">Villa avec piscine — 2 200 MAD/nuit</option>
+              <option value="appartement">Appartement médina — 550 MAD/nuit</option>
+            </optgroup>
+            <optgroup label="Excursions &amp; expériences">
+              <option value="quad">Excursion quad — 450 MAD/pers.</option>
+              <option value="buggy">Excursion buggy — 600 MAD/pers.</option>
+              <option value="agafay">Dîner-spectacle à Agafay — 750 MAD/pers.</option>
+              <option value="montgolfiere">Montgolfière au lever du soleil — 1 800 MAD/pers.</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="field-row" id="stayDates">
+          <div class="field">
+            <label for="checkin">Arrivée</label>
+            <input type="date" id="checkin" required>
+          </div>
+          <div class="field">
+            <label for="checkout">Départ</label>
+            <input type="date" id="checkout" required>
+          </div>
+        </div>
+
+        <div class="field" id="activityDateWrap" hidden>
+          <label for="activityDate">Date de la sortie</label>
+          <input type="date" id="activityDate" required>
+        </div>
+
+        <div class="field">
+          <label for="guests" id="guestsLabel">Voyageurs</label>
+          <select id="guests" required>
+            <option value="1">1 personne</option>
+            <option value="2" selected>2 personnes</option>
+            <option value="3">3 personnes</option>
+            <option value="4">4 personnes</option>
+            <option value="5">5 personnes</option>
+            <option value="6">6 personnes</option>
+            <option value="7">7 personnes</option>
+            <option value="8">8 personnes</option>
+          </select>
+        </div>
+
+        <div class="booking-summary" id="summary" hidden>
+          <div class="row" id="rowMain"></div>
+          <div class="row" id="rowExtra"></div>
+          <div class="row total" id="rowTotal"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Vérifier la disponibilité</button>
+        <p class="booking-msg" id="bookingMsg" role="alert"></p>
+      </form>
+    </div>
+  </section>
+
+  <div class="zellige-band" aria-hidden="true"></div>
+
+  <!-- AVIS -->
+  <section id="avis" aria-label="Avis clients">
+    <div class="wrap">
+      <div class="reviews-head reveal">
+        <div class="section-head" style="margin-bottom:0;">
+          <p class="eyebrow">Avis voyageurs</p>
+          <h2>340 séjours et sorties, 4.9 / 5.</h2>
+        </div>
+      </div>
+
+      <div class="review-grid" id="reviewGrid" role="region" aria-label="Grille des avis">
+        <div class="review-card reveal">
+          <div class="review-stars">★★★★★</div>
+          <p>Le riad était un vrai coup de cœur, calme malgré l'agitation de la médina à deux pas. L'équipe a organisé notre excursion quad le lendemain sans aucune friction.</p>
+          <div class="reviewer">
+            <div class="avatar"></div>
+            <div>
+              <b>Camille D.</b>
+              <span>Riad · 4 nuits · Mars 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal">
+          <div class="review-stars">★★★★★</div>
+          <p>Le dîner à Agafay restera notre meilleur souvenir du voyage : coucher de soleil, tente berbère, musique live. Organisation impeccable de bout en bout.</p>
+          <div class="reviewer">
+            <div class="avatar"></div>
+            <div>
+              <b>Marco B.</b>
+              <span>Dîner Agafay · Avril 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal">
+          <div class="review-stars">★★★★★</div>
+          <p>Villa parfaite pour notre groupe de dix, piscine impeccable, et le buggy dans l'après-midi a mis tout le monde d'accord.</p>
+          <div class="reviewer">
+            <div class="avatar"></div>
+            <div>
+              <b>Sara K.</b>
+              <span>Villa · 5 nuits · Mai 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal">
+          <div class="review-stars">★★★★★</div>
+          <p>La montgolfière au lever du soleil sur la plaine du Haouz vaut à elle seule le déplacement. Réservation simple, guide très professionnel.</p>
+          <div class="reviewer">
+            <div class="avatar"></div>
+            <div>
+              <b>Youssef A.</b>
+              <span>Montgolfière · Juin 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-pagination" id="reviewPagination">
+        <button class="pagination-btn active" data-page="0">1</button>
+        <button class="pagination-btn" data-page="1">2</button>
+        <span class="pagination-info">Affichage 1-4 sur 340 avis</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCALISATION -->
+  <section id="localisation" aria-label="Localisation">
+    <div class="wrap location">
+      <div class="reveal">
+        <p class="eyebrow">Accès</p>
+        <h2>Marrakech et ses environs.</h2>
+        <p style="color:rgba(36,28,22,.72); margin:1rem 0 2rem; max-width:48ch; line-height:1.7;">Nos hébergements sont situés dans la médina et ses abords ; nos excursions démarrent à 40-45 minutes de la ville, dans le désert d'Agafay et les contreforts de l'Atlas. Adresse exacte et point de rendez-vous envoyés après confirmation.</p>
+        <ul class="poi-list">
+          <li><span>Jemaa el-Fna</span><span>6 min à pied</span></li>
+          <li><span>Désert d'Agafay</span><span>40 min en voiture</span></li>
+          <li><span>Vallée de l'Ourika / Atlas</span><span>1h en voiture</span></li>
+          <li><span>Aéroport Marrakech-Ménara</span><span>25 min en taxi</span></li>
+        </ul>
+      </div>
+      <div class="map-box reveal">
+        <div class="pin" style="left:52%; top:44%;"></div>
+        <div class="pin pin-2" style="left:24%; top:66%;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section aria-label="Appel à l'action">
+    <div class="wrap">
+      <div class="cta-banner reveal">
+        <h2>Prêt pour votre séjour à Marrakech ?</h2>
+        <p>Réservez votre hébergement et vos excursions en direct, pour le meilleur tarif garanti.</p>
+        <a href="#reserver" class="btn btn-primary">Vérifier la disponibilité</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brand" style="margin-bottom:1rem; display:inline-flex;">
+          <span class="brand-mark"><span>MA</span></span> Maison Atlas
+        </a>
+        <p style="max-width:32ch; color:rgba(36,28,22,.6);">Médina de Marrakech &amp; désert d'Agafay, Maroc.</p>
+      </div>
+      <div>
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="#hebergements">Hébergements</a></li>
+          <li><a href="#excursions">Excursions</a></li>
+          <li><a href="#pourquoi">Pourquoi nous</a></li>
+          <li><a href="#reserver">Réserver</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Plateformes</h5>
+        <ul>
+          <li><a href="#">Réservation directe</a></li>
+          <li><a href="#">Profil Airbnb</a></li>
+          <li><a href="#">Profil Booking.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:contact@maisonatlas.example">contact@maisonatlas.example</a></li>
+          <li><a href="tel:+212600000000">+212 6 00 00 00 00</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Maison Atlas — Tous droits réservés.</span>
+      <span>Site professionnel développé avec accessibilité optimale.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // ========== State Management ==========
+  const state = {
+    favorites: JSON.parse(localStorage.getItem('favorites') || '[]'),
+    currentReviewPage: 0,
+    reviewsPerPage: 4
+  };
+
+  // ========== Utilities ==========
+  const DOM = {
+    header: document.getElementById('site-header'),
+    burger: document.getElementById('burger'),
+    navLinks: document.getElementById('navLinks'),
+    bookingForm: document.getElementById('bookingForm'),
+    category: document.getElementById('category'),
+    checkin: document.getElementById('checkin'),
+    checkout: document.getElementById('checkout'),
+    activityDate: document.getElementById('activityDate'),
+    activityDateWrap: document.getElementById('activityDateWrap'),
+    guests: document.getElementById('guests'),
+    summary: document.getElementById('summary'),
+    bookingMsg: document.getElementById('bookingMsg'),
+    priceHeadline: document.getElementById('priceHeadline'),
+    priceNote: document.getElementById('priceNote'),
+    stayDates: document.getElementById('stayDates'),
+    guestsLabel: document.getElementById('guestsLabel'),
+    typeFilters: document.getElementById('typeFilters'),
+    activityFilters: document.getElementById('activityFilters'),
+    hebergementGrid: document.getElementById('hebergementGrid'),
+    excursionGrid: document.getElementById('excursionGrid'),
+    reviewGrid: document.getElementById('reviewGrid'),
+    reviewPagination: document.getElementById('reviewPagination')
+  };
+
+  const CATALOG = {
+    palais: { label: 'Palais privé', type: 'stay', price: 3500, unit: 'nuit' },
+    riad: { label: 'Riad de charme', type: 'stay', price: 950, unit: 'nuit' },
+    villa: { label: 'Villa avec piscine', type: 'stay', price: 2200, unit: 'nuit' },
+    appartement: { label: 'Appartement médina', type: 'stay', price: 550, unit: 'nuit' },
+    quad: { label: 'Excursion quad', type: 'activity', price: 450, unit: 'pers.' },
+    buggy: { label: 'Excursion buggy', type: 'activity', price: 600, unit: 'pers.' },
+    agafay: { label: 'Dîner-spectacle à Agafay', type: 'activity', price: 750, unit: 'pers.' },
+    montgolfiere: { label: 'Montgolfière au lever du soleil', type: 'activity', price: 1800, unit: 'pers.' }
+  };
+
+  const CLEANING_FEE = 300;
+  const TAX_PER_GUEST_PER_NIGHT = 20;
+
+  function fmt(n) {
+    return Math.round(n).toLocaleString('fr-FR') + ' MAD';
+  }
+
+  // ========== Header & Nav ==========
+  function handleScroll() {
+    DOM.header.classList.toggle('scrolled', window.scrollY > 40);
+  }
+
+  DOM.burger.addEventListener('click', function() {
+    const isOpen = DOM.navLinks.classList.toggle('open');
+    DOM.burger.classList.toggle('open', isOpen);
+    DOM.burger.setAttribute('aria-expanded', isOpen);
+  });
+
+  DOM.navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      DOM.navLinks.classList.remove('open');
+      DOM.burger.classList.remove('open');
+      DOM.burger.setAttribute('aria-expanded', false);
+    });
+  });
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+
+  // ========== Favorites ==========
+  function toggleFavorite(id) {
+    const index = state.favorites.indexOf(id);
+    if (index > -1) {
+      state.favorites.splice(index, 1);
+    } else {
+      state.favorites.push(id);
+    }
+    localStorage.setItem('favorites', JSON.stringify(state.favorites));
+    updateFavoriteButtons();
+  }
+
+  function updateFavoriteButtons() {
+    document.querySelectorAll('.favorite-btn').forEach(btn => {
+      const id = btn.getAttribute('data-id');
+      const isFavorite = state.favorites.includes(id);
+      btn.textContent = isFavorite ? '♥' : '♡';
+      btn.style.color = isFavorite ? '#c1592f' : 'inherit';
+    });
+  }
+
+  document.addEventListener('click', e => {
+    if (e.target.classList.contains('favorite-btn')) {
+      e.preventDefault();
+      const id = e.target.getAttribute('data-id');
+      toggleFavorite(id);
+    }
+  });
+
+  updateFavoriteButtons();
+
+  // ========== Filtering ==========
+  function setupFilters(container, grid) {
+    const buttons = container.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        filterGrid(grid, filter);
+      });
+    });
+  }
+
+  function filterGrid(grid, filter) {
+    grid.querySelectorAll('.offer-card').forEach(card => {
+      const type = card.getAttribute('data-type');
+      const show = filter === 'all' || type === filter;
+      card.style.display = show ? '' : 'none';
+      if (show) {
+        card.style.animation = 'reveal-in 0.5s ease';
+      }
+    });
+  }
+
+  setupFilters(DOM.typeFilters, DOM.hebergementGrid);
+  setupFilters(DOM.activityFilters, DOM.excursionGrid);
+
+  // ========== Booking Calculator ==========
+  function currentOffer() {
+    return CATALOG[DOM.category.value];
+  }
+
+  function refreshHeadline() {
+    const offer = currentOffer();
+    DOM.priceHeadline.innerHTML = fmt(offer.price) + ' <span>/ ' + offer.unit + '</span>';
+    DOM.priceNote.textContent = offer.label + (offer.type === 'stay' ? ' · minimum 2 nuits' : ' · réservation à la journée');
+  }
+
+  function toggleFields() {
+    const offer = currentOffer();
+    DOM.stayDates.hidden = offer.type !== 'stay';
+    DOM.activityDateWrap.hidden = offer.type !== 'activity';
+    DOM.guestsLabel.textContent = offer.type === 'stay' ? 'Voyageurs' : 'Participants';
+    DOM.summary.hidden = true;
+    DOM.bookingMsg.textContent = '';
+    DOM.bookingMsg.className = 'booking-msg';
+  }
+
+  function computeStayNights(inDate, outDate) {
+    return Math.round((outDate - inDate) / 86400000);
+  }
+
+  function updateSummary() {
+    DOM.bookingMsg.textContent = '';
+    DOM.bookingMsg.className = 'booking-msg';
+    const offer = currentOffer();
+    const g = parseInt(DOM.guests.value, 10);
+
+    if (offer.type === 'stay') {
+      if (!DOM.checkin.value || !DOM.checkout.value) {
+        DOM.summary.hidden = true;
+        return;
+      }
+      const inDate = new Date(DOM.checkin.value + 'T00:00:00');
+      const outDate = new Date(DOM.checkout.value + 'T00:00:00');
+      if (outDate <= inDate) {
+        DOM.summary.hidden = true;
+        DOM.bookingMsg.textContent = "La date de départ doit être après la date d'arrivée.";
+        DOM.bookingMsg.className = 'booking-msg error';
+        return;
+      }
+      const nights = computeStayNights(inDate, outDate);
+      if (nights < 2) {
+        DOM.summary.hidden = true;
+        DOM.bookingMsg.textContent = 'Le séjour minimum est de 2 nuits.';
+        DOM.bookingMsg.className = 'booking-msg error';
+        return;
+      }
+      const stayTotal = nights * offer.price;
+      const taxTotal = nights * g * TAX_PER_GUEST_PER_NIGHT;
+      const grandTotal = stayTotal + CLEANING_FEE + taxTotal;
+
+      document.getElementById('rowMain').innerHTML =
+        '<span>' + nights + ' nuit' + (nights > 1 ? 's' : '') + ' · ' + offer.label + '</span><span>' + fmt(stayTotal) + '</span>';
+      document.getElementById('rowExtra').innerHTML =
+        '<span>Ménage + taxe de séjour (' + g + ' voy.)</span><span>' + fmt(CLEANING_FEE + taxTotal) + '</span>';
+      document.getElementById('rowTotal').innerHTML =
+        '<span>Total estimé</span><span>' + fmt(grandTotal) + '</span>';
+      DOM.summary.hidden = false;
+    } else {
+      if (!DOM.activityDate.value) {
+        DOM.summary.hidden = true;
+        return;
+      }
+      const participantsTotal = g * offer.price;
+      document.getElementById('rowMain').innerHTML =
+        '<span>' + g + ' participant' + (g > 1 ? 's' : '') + ' · ' + offer.label + '</span><span>' + fmt(participantsTotal) + '</span>';
+      document.getElementById('rowExtra').innerHTML =
+        '<span>Transfert &amp; encadrement</span><span>Inclus</span>';
+      document.getElementById('rowTotal').innerHTML =
+        '<span>Total estimé</span><span>' + fmt(participantsTotal) + '</span>';
+      DOM.summary.hidden = false;
+    }
+  }
+
+  DOM.category.addEventListener('change', () => {
+    refreshHeadline();
+    toggleFields();
+    updateSummary();
+  });
+
+  DOM.checkin.addEventListener('change', () => {
+    if (DOM.checkout.value && new Date(DOM.checkout.value) <= new Date(DOM.checkin.value)) {
+      const next = new Date(DOM.checkin.value);
+      next.setDate(next.getDate() + 2);
+      DOM.checkout.value = next.toISOString().slice(0, 10);
+    }
+    DOM.checkout.setAttribute('min', DOM.checkin.value);
+    updateSummary();
+  });
+
+  DOM.checkout.addEventListener('change', updateSummary);
+  DOM.activityDate.addEventListener('change', updateSummary);
+  DOM.guests.addEventListener('change', updateSummary);
+
+  DOM.bookingForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (DOM.summary.hidden) {
+      updateSummary();
+      if (DOM.summary.hidden && !DOM.bookingMsg.textContent) {
+        DOM.bookingMsg.textContent = 'Merci de renseigner les dates souhaitées.';
+        DOM.bookingMsg.className = 'booking-msg error';
+      }
+      return;
+    }
+    DOM.bookingMsg.textContent = 'Disponible — vous allez être redirigé vers le paiement sécurisé.';
+    DOM.bookingMsg.className = 'booking-msg ok';
+  });
+
+  // Set min dates
+  const todayStr = new Date().toISOString().slice(0, 10);
+  DOM.checkin.setAttribute('min', todayStr);
+  DOM.checkout.setAttribute('min', todayStr);
+  DOM.activityDate.setAttribute('min', todayStr);
+
+  refreshHeadline();
+  toggleFields();
+
+  // ========== Review Pagination ==========
+  function updateReviewPagination() {
+    const page = state.currentReviewPage;
+    const start = page * state.reviewsPerPage;
+    const cards = Array.from(DOM.reviewGrid.querySelectorAll('.review-card'));
+    
+    cards.forEach((card, index) => {
+      card.style.display = (index >= start && index < start + state.reviewsPerPage) ? '' : 'none';
+    });
+
+    DOM.reviewPagination.querySelectorAll('.pagination-btn').forEach((btn, index) => {
+      btn.classList.toggle('active', index === page);
+    });
+  }
+
+  DOM.reviewPagination.querySelectorAll('.pagination-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.currentReviewPage = parseInt(btn.getAttribute('data-page'), 10);
+      updateReviewPagination();
+    });
+  });
+
+  updateReviewPagination();
+
+  // ========== Reveal on Scroll ==========
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+})();
+</script>
+
+</body>
+</html>
